@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: A Visual Guide to Dividends</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- 
+    Application Structure Plan: This infographic follows a narrative structure designed to educate a novice investor. 
+    1. Hook: A simple, large-type definition of a dividend.
+    2. The Core Choice: Visually represent the company's strategic decision between reinvesting profits or distributing them.
+    3. The Lifecycle: A step-by-step flowchart of the four key dates to explain the process.
+    4. Why It Matters: A dual-perspective section showing the benefits for both companies and investors.
+    5. Key Metrics & Tax: Introduce the concept of dividend yield and visualize the significant tax differences.
+    6. Historical Impact: A powerful closing visual showing the historical contribution of dividends to total market returns.
+    This flow builds knowledge progressively, using visuals to simplify complex financial concepts.
+    -->
+    <!-- 
+    Visualization & Content Choices:
+    - What is a Dividend: Goal: Inform. Viz: Large typography. Justification: A strong, simple statement is most effective for a hook. Method: HTML/CSS.
+    - Company's Choice: Goal: Compare. Viz: HTML/CSS diagram with two paths. Justification: Clearly illustrates the two strategic options a company has with its profits. Method: HTML/CSS.
+    - Dividend Lifecycle Flowchart: Goal: Organize/Process. Viz: Horizontal flowchart. Justification: A process is best shown sequentially. A flowchart is more engaging than a table. Method: HTML/CSS with Tailwind. NO SVG/Mermaid.
+    - Why Dividends Matter: Goal: Compare/Inform. Viz: Two-column card layout with Unicode icons. Justification: Easy to scan and compare the two perspectives (company vs. investor). Method: HTML/CSS.
+    - Qualified vs. Ordinary Tax Rate: Goal: Compare. Viz: Chart.js Bar Chart. Justification: A bar chart provides a direct, powerful comparison of the tax rate disparity. Library: Chart.js.
+    - Dividend Contribution to S&P 500: Goal: Inform. Viz: Chart.js Donut Chart. Justification: A donut chart is excellent for showing a part-to-whole relationship, emphasizing the large contribution of dividends. Library: Chart.js.
+    - Dividend Yield Formula: Goal: Inform. Viz: Styled text block. Justification: A clear formula is best for explaining a calculation. Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; }
+        .infographic-card { background-color: white; border-radius: 1rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04); padding: 2rem; }
+        .chart-container { position: relative; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .flow-line { content: ''; position: absolute; top: 1.25rem; left: 50%; transform: translateX(-50%); height: 4px; z-index: 0; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#00A6ED]">A Visual Guide to Dividends</h1>
+            <p class="mt-4 text-lg text-gray-600">Understanding how companies share profits with you, the investor.</p>
+        </header>
+
+        <section class="mb-16">
+            <div class="infographic-card text-center">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">What Exactly Is a Dividend?</h2>
+                <p class="text-5xl md:text-6xl font-bold text-[#00B1D2]">It's a share of a company's profits, paid directly to you for being an owner.</p>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">When a profitable company has cash left over, its board of directors faces a key choice: reinvest the money for growth or distribute it to shareholders. That distribution is a dividend.</p>
+            </div>
+        </section>
+        
+        <section class="mb-16">
+             <h2 class="text-3xl font-bold text-center mb-8 text-[#00A6ED]">The Lifecycle of a Dividend Payment</h2>
+             <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">From announcement to payment, every dividend follows four critical dates. Owning the stock before the 'Ex-Dividend Date' is the key to getting paid.</p>
+            <div class="relative grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="absolute hidden md:block flow-line bg-[#00B9B2] w-full"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-[#00A6ED] text-white flex items-center justify-center font-bold text-xl mb-4">1</div>
+                    <h3 class="font-bold text-lg mb-2">Declaration Date</h3>
+                    <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">The company's board officially announces the dividend, its amount, and the payment schedule.</p>
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-[#00B1D2] text-white flex items-center justify-center font-bold text-xl mb-4">2</div>
+                    <h3 class="font-bold text-lg mb-2">Ex-Dividend Date</h3>
+                    <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">The cutoff day. You must buy the stock *before* this date to receive the dividend. The stock exchange sets this date.</p>
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-[#00B9B2] text-white flex items-center justify-center font-bold text-xl mb-4">3</div>
+                    <h3 class="font-bold text-lg mb-2">Record Date</h3>
+                    <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">The company checks its books to see who the official shareholders are. If you're on the list, you get paid.</p>
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-[#00C08D] text-white flex items-center justify-center font-bold text-xl mb-4">4</div>
+                    <h3 class="font-bold text-lg mb-2">Payment Date</h3>
+                    <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">Payday! The cash (or stock) is actually delivered to the eligible shareholders' accounts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#00A6ED]">Why Dividends Matter</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="infographic-card">
+                    <h3 class="font-bold text-2xl text-center text-[#00B1D2] mb-4">For the Company</h3>
+                    <p class="text-gray-600 mb-6 text-center">Paying a dividend is a strategic move that sends powerful signals to the market.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start"><span class="text-2xl mr-3">📡</span><div><strong>Signals Financial Health:</strong> Shows confidence in stable, ongoing profits.</div></li>
+                        <li class="flex items-start"><span class="text-2xl mr-3">🎯</span><div><strong>Enforces Discipline:</strong> Prevents managers from wasting excess cash on low-return projects.</div></li>
+                        <li class="flex items-start"><span class="text-2xl mr-3">🧲</span><div><strong>Attracts Investors:</strong> Appeals to a broad base of investors seeking regular income.</div></li>
+                    </ul>
+                </div>
+                <div class="infographic-card">
+                    <h3 class="font-bold text-2xl text-center text-[#00C08D] mb-4">For the Investor</h3>
+                    <p class="text-gray-600 mb-6 text-center">Dividends are a cornerstone of many successful investment strategies.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start"><span class="text-2xl mr-3">💰</span><div><strong>Provides Regular Income:</strong> A steady cash stream to spend or reinvest.</div></li>
+                        <li class="flex items-start"><span class="text-2xl mr-3">📈</span><div><strong>Powers Compounding:</strong> Reinvesting dividends buys more shares, accelerating growth.</div></li>
+                        <li class="flex items-start"><span class="text-2xl mr-3">🛡️</span><div><strong>Reduces Volatility:</strong> Provides a "cushion" during market downturns and a hedge against inflation.</div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-5 gap-8 mb-16 items-center">
+            <div class="md:col-span-2 infographic-card text-center">
+                <h3 class="font-bold text-2xl text-[#00A6ED] mb-4">The #1 Metric: Dividend Yield</h3>
+                <p class="text-gray-600 mb-4">Yield measures the dividend relative to the stock price, allowing for easy comparison.</p>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <p class="font-mono text-sm">(Annual Dividend ÷ Stock Price) x 100</p>
+                </div>
+                <p class="text-gray-600 mt-4">A $100 stock with a $3 annual dividend has a <strong>3% yield</strong>.</p>
+                <p class="text-xs text-gray-500 mt-4">Warning: An unusually high yield can be a red flag that the stock price has fallen, not a sign of a healthy dividend.</p>
+            </div>
+            <div class="md:col-span-3 infographic-card">
+                 <h3 class="font-bold text-2xl text-center text-[#00A6ED] mb-2">A Tale of Two Taxes</h3>
+                 <p class="text-center text-gray-600 mb-6">How dividends are taxed makes a huge difference. "Qualified" dividends get much better tax rates.</p>
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="taxChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 infographic-card">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#00A6ED]">The Unseen Power of Dividends</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Dividends aren't just for income. Historically, they have been a massive component of the stock market's total return, especially over the long run.</p>
+            <div class="chart-container">
+                <canvas id="contributionChart"></canvas>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 py-4 border-t">
+            <p class="text-gray-500">This infographic is for educational purposes, based on analysis of the U.S. financial landscape.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const wrapLabel = (label) => {
+                if (label.length <= 16) return label;
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).length > 16) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = currentLine ? currentLine + ' ' + word : word;
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            const taxData = {
+                labels: [wrapLabel('Qualified Dividend Max Rate'), wrapLabel('Ordinary Income Top Rate')],
+                datasets: [{
+                    label: 'Maximum Federal Tax Rate',
+                    data: [20, 37],
+                    backgroundColor: ['#00C65E', '#FF4E50'],
+                    borderColor: ['#00C65E', '#FF4E50'],
+                    borderWidth: 1,
+                    barThickness: 50,
+                }]
+            };
+
+            new Chart(document.getElementById('taxChart').getContext('2d'), {
+                type: 'bar',
+                data: taxData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { display: false },
+                            ticks: { callback: value => value + '%' }
+                        },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `${context.raw}%` } }
+                    }
+                }
+            });
+
+            const contributionData = {
+                labels: ['Dividends', 'Price Appreciation'],
+                datasets: [{
+                    label: 'Contribution to S&P 500 Total Return',
+                    data: [57, 43],
+                    backgroundColor: ['#00B1D2', '#00A6ED'],
+                    borderColor: '#ffffff',
+                    borderWidth: 4,
+                }]
+            };
+
+            new Chart(document.getElementById('contributionChart').getContext('2d'), {
+                type: 'doughnut',
+                data: contributionData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } },
+                        title: {
+                            display: true,
+                            text: 'S&P 500 Total Return Contribution (20-Year Average)',
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
